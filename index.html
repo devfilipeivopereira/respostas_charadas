@@ -108,15 +108,13 @@
     pointer-events: none;
   }
 
-  .hero-copy,
-  .hero-panel {
+  .hero-copy {
     position: relative;
     z-index: 1;
   }
 
   .eyebrow,
   .hero-badge,
-  .panel-kicker,
   .answer-label,
   .card-kicker,
   .footer-mark {
@@ -145,64 +143,6 @@
     line-height: 0.96;
     color: #fff4d4;
     text-wrap: balance;
-  }
-
-  .hero-subtitle {
-    max-width: 34rem;
-    margin-top: 16px;
-    font-size: clamp(1.05rem, 4.3vw, 1.35rem);
-    line-height: 1.55;
-    color: var(--muted);
-  }
-
-  .hero-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 18px;
-  }
-
-  .hero-tag {
-    padding: 10px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.04);
-    color: rgba(239, 243, 251, 0.78);
-    font-size: 0.95rem;
-  }
-
-  .hero-panel {
-    padding: 20px;
-    border: 1px solid rgba(243, 197, 90, 0.14);
-    border-radius: var(--radius-lg);
-    background:
-      linear-gradient(180deg, rgba(243, 197, 90, 0.08), transparent 42%),
-      rgba(4, 11, 22, 0.62);
-    box-shadow: var(--shadow-soft);
-    backdrop-filter: blur(12px);
-  }
-
-  .panel-kicker {
-    color: var(--gold-soft);
-    font-size: 0.72rem;
-  }
-
-  .panel-text {
-    margin-top: 12px;
-    color: var(--muted);
-    line-height: 1.55;
-    font-size: 1.02rem;
-  }
-
-  .panel-note {
-    margin-top: 16px;
-    padding: 14px 16px;
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(243, 197, 90, 0.14);
-    background: rgba(255, 255, 255, 0.03);
-    color: rgba(239, 243, 251, 0.8);
-    line-height: 1.45;
-    font-size: 0.96rem;
   }
 
   .control-shell {
@@ -406,8 +346,6 @@
     }
 
     .hero {
-      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
-      align-items: stretch;
       padding: 32px;
     }
 
@@ -448,19 +386,7 @@
       <div class="hero-copy">
         <p class="hero-badge">Ministério de Homens</p>
         <h1 class="hero-title">Desafio do Guerreiro</h1>
-        <p class="hero-subtitle">Um gabarito oficial com cara de evento, leitura limpa e interação pensada para celular. Toque, revele e acompanhe o progresso sem se perder no meio dos enigmas.</p>
-        <div class="hero-tags">
-          <span class="hero-tag">Aniversário Pr. Filipe</span>
-          <span class="hero-tag">Cada Homem Um Guerreiro</span>
-          <span class="hero-tag">Feito para toque</span>
-        </div>
       </div>
-
-      <aside class="hero-panel" aria-label="Orientação do jogo">
-        <p class="panel-kicker">Painel oficial</p>
-        <p class="panel-text">Cada resposta fica escondida até o toque. Assim, cada pessoa pode abrir somente as charadas que quiser, no ritmo dela.</p>
-        <p class="panel-note">A experiência agora é totalmente individual: sem contador, sem progresso e sem botões para abrir tudo de uma vez.</p>
-      </aside>
     </header>
 
     <section class="control-shell">
@@ -715,7 +641,6 @@
 
     <footer class="site-footer">
       <p class="footer-mark">IFC Guerreiros</p>
-      <p class="footer-text">Aniversário Pr. Filipe · Cada Homem Um Guerreiro</p>
     </footer>
   </div>
 
