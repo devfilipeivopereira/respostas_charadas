@@ -2,20 +2,20 @@
 
 **Objetivo**
 
-Transformar a página de respostas do jogo em uma experiência mobile-first, mantendo o clima cerimonial do evento, mas com leitura mais fluida, melhor ergonomia de toque e ações mais claras para revelar ou ocultar respostas.
+Transformar a página de respostas do jogo em uma experiência mobile-first, mantendo o clima cerimonial do evento, mas com leitura mais fluida, melhor ergonomia de toque e foco total na revelação individual de cada charada.
 
 **Direção visual**
 
 - Editorial contemporâneo com base azul-marinho e dourado.
-- Hero mais compacto, com bloco de contexto e indicadores de progresso.
+- Hero mais compacto, com bloco de contexto e orientação de uso.
 - Cards maiores, mais respiráveis e mais legíveis no celular.
-- Barra de ações fixa no mobile para diminuir atrito em telas pequenas.
+- Interface mais limpa, sem atalhos globais que quebrem o ritmo do jogo.
 
 **Comportamento**
 
 - Cada enigma passa a usar botão real para abertura e fechamento, com `aria-expanded`.
-- O total de respostas reveladas aparece em destaque e atualiza em tempo real.
-- A página oferece ações dedicadas para revelar todas e esconder todas as respostas.
+- A interação acontece apenas charada por charada, sem contador de progresso.
+- Não existem ações para revelar tudo ou esconder tudo de uma vez.
 
 **Critérios de sucesso**
 

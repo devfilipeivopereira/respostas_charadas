@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Modernizar a página de respostas com foco em ergonomia mobile e publicar o resultado no repositório remoto.
+**Goal:** Modernizar a página de respostas com foco em ergonomia mobile e revelar cada charada individualmente, publicando o resultado no repositório remoto.
 
-**Architecture:** Uma única página estática em `index.html` concentra layout, estilo e interações. A validação usa um teste leve com `node:test` para garantir a presença da nova estrutura interativa e dos controles principais.
+**Architecture:** Uma única página estática em `index.html` concentra layout, estilo e interações. A validação usa um teste leve com `node:test` para garantir a presença dos cards interativos e a ausência de controles globais de progresso e revelação total.
 
 **Tech Stack:** HTML, CSS, JavaScript vanilla, Node.js test runner, Git.
 

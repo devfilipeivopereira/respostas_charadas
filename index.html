@@ -81,7 +81,7 @@
     z-index: 1;
     width: min(1180px, calc(100% - 24px));
     margin: 0 auto;
-    padding: 18px 0 120px;
+    padding: 18px 0 48px;
   }
 
   .hero {
@@ -187,65 +187,25 @@
     font-size: 0.72rem;
   }
 
-  .panel-score {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    margin-top: 14px;
-  }
-
-  .panel-score strong {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(2.8rem, 13vw, 4.7rem);
-    line-height: 0.9;
-    color: #fff4d4;
-  }
-
-  .panel-score span {
-    padding-bottom: 7px;
-    color: var(--muted);
-    font-size: 1rem;
-  }
-
   .panel-text {
-    margin-top: 14px;
+    margin-top: 12px;
     color: var(--muted);
     line-height: 1.55;
     font-size: 1.02rem;
   }
 
-  .panel-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 18px;
-  }
-
-  .panel-chip {
-    min-width: 102px;
-    padding: 12px 13px;
+  .panel-note {
+    margin-top: 16px;
+    padding: 14px 16px;
     border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  .panel-chip strong {
-    display: block;
-    font-family: 'Cinzel', serif;
-    color: #fff4d4;
-    font-size: 1rem;
-  }
-
-  .panel-chip span {
-    display: block;
-    margin-top: 5px;
-    color: rgba(239, 243, 251, 0.65);
-    font-size: 0.88rem;
+    border: 1px solid rgba(243, 197, 90, 0.14);
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(239, 243, 251, 0.8);
+    line-height: 1.45;
+    font-size: 0.96rem;
   }
 
   .control-shell {
-    position: sticky;
-    top: 12px;
     display: grid;
     gap: 16px;
     margin-top: 18px;
@@ -255,7 +215,6 @@
     background: rgba(7, 17, 31, 0.82);
     box-shadow: var(--shadow-soft);
     backdrop-filter: blur(14px);
-    z-index: 4;
   }
 
   .eyebrow {
@@ -276,48 +235,6 @@
     color: var(--muted);
     font-size: 1rem;
     line-height: 1.55;
-  }
-
-  .control-buttons {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .action-button {
-    appearance: none;
-    border: 0;
-    border-radius: 16px;
-    min-height: 52px;
-    padding: 14px 16px;
-    font-family: 'Cinzel', serif;
-    font-size: 0.84rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: transform 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease, opacity 180ms ease;
-  }
-
-  .action-button:hover {
-    transform: translateY(-1px);
-  }
-
-  .action-button:disabled {
-    cursor: default;
-    opacity: 0.45;
-    transform: none;
-  }
-
-  .action-button.primary {
-    background: linear-gradient(135deg, #f3c55a 0%, #d4a225 100%);
-    color: #241603;
-    box-shadow: 0 16px 30px rgba(212, 162, 37, 0.22);
-  }
-
-  .action-button.secondary {
-    background: rgba(255, 255, 255, 0.02);
-    color: #fff4d4;
-    border: 1px solid rgba(243, 197, 90, 0.26);
   }
 
   .riddle-grid {
@@ -365,8 +282,7 @@
     cursor: pointer;
   }
 
-  .card-toggle:focus-visible,
-  .action-button:focus-visible {
+  .card-toggle:focus-visible {
     outline: 2px solid #f3c55a;
     outline-offset: 3px;
   }
@@ -465,46 +381,6 @@
     line-height: 1.55;
   }
 
-  .action-bar {
-    position: fixed;
-    right: 12px;
-    bottom: 12px;
-    left: 12px;
-    display: grid;
-    gap: 12px;
-    padding: 14px;
-    border: 1px solid rgba(243, 197, 90, 0.16);
-    border-radius: 22px;
-    background: rgba(7, 17, 31, 0.92);
-    backdrop-filter: blur(18px);
-    box-shadow: var(--shadow);
-    z-index: 10;
-  }
-
-  .action-bar-copy {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .action-bar-label {
-    color: rgba(239, 243, 251, 0.62);
-    font-size: 0.9rem;
-  }
-
-  .action-bar-copy strong {
-    font-family: 'Cinzel', serif;
-    color: #fff4d4;
-    font-size: 1rem;
-  }
-
-  .action-bar-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
   .site-footer {
     margin-top: 26px;
     padding: 26px 18px 0;
@@ -536,35 +412,19 @@
     }
 
     .control-shell {
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
+      grid-template-columns: minmax(0, 1fr);
       padding: 20px 22px;
-    }
-
-    .control-buttons {
-      grid-template-columns: repeat(2, minmax(180px, 1fr));
     }
 
     .riddle-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
     }
-
-    .action-bar {
-      right: auto;
-      left: 50%;
-      width: min(680px, calc(100% - 32px));
-      transform: translateX(-50%);
-    }
   }
 
   @media (min-width: 1080px) {
     .riddle-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .action-bar {
-      display: none;
     }
   }
 
@@ -596,40 +456,18 @@
         </div>
       </div>
 
-      <aside class="hero-panel" aria-label="Painel de progresso">
+      <aside class="hero-panel" aria-label="Orientação do jogo">
         <p class="panel-kicker">Painel oficial</p>
-        <div class="panel-score">
-          <strong id="revealedCount">0</strong>
-          <span>de 10 respostas reveladas</span>
-        </div>
-        <p class="panel-text">Você pode abrir uma por vez para manter o suspense ou usar as ações rápidas quando quiser conferir o gabarito inteiro de uma vez.</p>
-        <div class="panel-chips">
-          <div class="panel-chip">
-            <strong>10</strong>
-            <span>enigmas</span>
-          </div>
-          <div class="panel-chip">
-            <strong>1 toque</strong>
-            <span>para abrir</span>
-          </div>
-          <div class="panel-chip">
-            <strong>100%</strong>
-            <span>mobile-first</span>
-          </div>
-        </div>
+        <p class="panel-text">Cada resposta fica escondida até o toque. Assim, cada pessoa pode abrir somente as charadas que quiser, no ritmo dela.</p>
+        <p class="panel-note">A experiência agora é totalmente individual: sem contador, sem progresso e sem botões para abrir tudo de uma vez.</p>
       </aside>
     </header>
 
     <section class="control-shell">
       <div class="control-copy">
         <p class="eyebrow">Modo celular</p>
-        <h2 class="control-title">Abra no seu ritmo ou revele tudo sem rolar a página inteira atrás do botão.</h2>
-        <p class="control-text">Os cards foram redesenhados para leitura rápida, alvo de toque confortável e navegação mais clara em telas pequenas.</p>
-      </div>
-
-      <div class="control-buttons">
-        <button class="action-button primary" type="button" data-action="reveal-all">Revelar todas</button>
-        <button class="action-button secondary" type="button" data-action="hide-all">Esconder todas</button>
+        <h2 class="control-title">Toque em cada enigma e revele só quando quiser.</h2>
+        <p class="control-text">Os cards continuam com leitura rápida e alvo de toque confortável, mas agora sem distrações de progresso nem atalhos globais.</p>
       </div>
     </section>
 
@@ -875,17 +713,6 @@
       </article>
     </main>
 
-    <div class="action-bar" aria-label="Ações rápidas">
-      <div class="action-bar-copy">
-        <span class="action-bar-label">Progresso</span>
-        <strong><span id="revealedCountDock">0</span>/10 reveladas</strong>
-      </div>
-      <div class="action-bar-buttons">
-        <button class="action-button primary" type="button" data-action="reveal-all">Revelar</button>
-        <button class="action-button secondary" type="button" data-action="hide-all">Fechar</button>
-      </div>
-    </div>
-
     <footer class="site-footer">
       <p class="footer-mark">IFC Guerreiros</p>
       <p class="footer-text">Aniversário Pr. Filipe · Cada Homem Um Guerreiro</p>
@@ -894,10 +721,6 @@
 
   <script>
     const cards = Array.from(document.querySelectorAll('.riddle-card'));
-    const revealButtons = Array.from(document.querySelectorAll('[data-action="reveal-all"]'));
-    const hideButtons = Array.from(document.querySelectorAll('[data-action="hide-all"]'));
-    const revealedCount = document.getElementById('revealedCount');
-    const revealedCountDock = document.getElementById('revealedCountDock');
 
     function setCardState(card, isOpen) {
       const toggle = card.querySelector('.card-toggle');
@@ -910,49 +733,14 @@
       footerText.textContent = isOpen ? 'Toque para ocultar' : 'Toque para revelar';
     }
 
-    function syncSummary() {
-      const openedCards = cards.filter((card) => card.dataset.open === 'true').length;
-
-      revealedCount.textContent = String(openedCards);
-      revealedCountDock.textContent = String(openedCards);
-
-      const allOpen = openedCards === cards.length;
-      const noneOpen = openedCards === 0;
-
-      revealButtons.forEach((button) => {
-        button.disabled = allOpen;
-      });
-
-      hideButtons.forEach((button) => {
-        button.disabled = noneOpen;
-      });
-    }
-
     cards.forEach((card) => {
       const toggle = card.querySelector('.card-toggle');
 
       toggle.addEventListener('click', () => {
         const isOpen = card.dataset.open === 'true';
         setCardState(card, !isOpen);
-        syncSummary();
       });
     });
-
-    revealButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        cards.forEach((card) => setCardState(card, true));
-        syncSummary();
-      });
-    });
-
-    hideButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        cards.forEach((card) => setCardState(card, false));
-        syncSummary();
-      });
-    });
-
-    syncSummary();
   </script>
 </body>
 </html>

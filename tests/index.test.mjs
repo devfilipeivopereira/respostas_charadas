@@ -4,15 +4,15 @@ import { readFileSync } from 'node:fs';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 
-test('exposes the new control shell and mobile action bar', () => {
+test('keeps a compact intro shell without global progress widgets', () => {
   assert.match(html, /class="control-shell"/);
-  assert.match(html, /class="action-bar"/);
-  assert.match(html, /id="revealedCount"/);
+  assert.doesNotMatch(html, /class="action-bar"/);
+  assert.doesNotMatch(html, /id="revealedCount"/);
 });
 
-test('offers dedicated reveal and hide all actions', () => {
-  assert.match(html, /data-action="reveal-all"/);
-  assert.match(html, /data-action="hide-all"/);
+test('does not expose reveal-all or hide-all controls', () => {
+  assert.doesNotMatch(html, /data-action="reveal-all"/);
+  assert.doesNotMatch(html, /data-action="hide-all"/);
 });
 
 test('renders ten interactive riddle cards', () => {
