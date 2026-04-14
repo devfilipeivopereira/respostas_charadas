@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Respostas | Desafio do Guerreiro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Crimson+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #07111f;
+    --night-soft: #0d1c33;
+    --night-panel: rgba(13, 28, 51, 0.82);
+    --ink: #eff3fb;
+    --muted: rgba(239, 243, 251, 0.72);
+    --gold: #d4a225;
+    --gold-soft: #f3c55a;
+    --gold-deep: #8b6512;
+    --line: rgba(212, 162, 37, 0.2);
+    --line-strong: rgba(212, 162, 37, 0.42);
+    --card: rgba(9, 21, 39, 0.84);
+    --shadow: 0 22px 60px rgba(0, 0, 0, 0.3);
+    --shadow-soft: 0 14px 32px rgba(0, 0, 0, 0.22);
+    --radius-xl: 28px;
+    --radius-lg: 22px;
+    --radius-md: 18px;
+    --radius-sm: 14px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Crimson Pro', Georgia, serif;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at top, rgba(243, 197, 90, 0.18), transparent 34%),
+      radial-gradient(circle at bottom right, rgba(212, 162, 37, 0.1), transparent 28%),
+      linear-gradient(180deg, #091423 0%, #07111f 48%, #050c17 100%);
+    overflow-x: hidden;
+  }
+
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::before {
+    background:
+      linear-gradient(115deg, rgba(255, 255, 255, 0.028) 0, rgba(255, 255, 255, 0.028) 1px, transparent 1px, transparent 100%),
+      linear-gradient(25deg, rgba(255, 255, 255, 0.02) 0, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 100%);
+    background-size: 52px 52px;
+    opacity: 0.22;
+  }
+
+  body::after {
+    background:
+      radial-gradient(circle at 18% 12%, rgba(243, 197, 90, 0.12), transparent 18%),
+      radial-gradient(circle at 80% 82%, rgba(243, 197, 90, 0.08), transparent 20%);
+  }
+
+  button {
+    font: inherit;
+  }
+
+  .page-shell {
+    position: relative;
+    z-index: 1;
+    width: min(1180px, calc(100% - 24px));
+    margin: 0 auto;
+    padding: 18px 0 120px;
+  }
+
+  .hero {
+    position: relative;
+    display: grid;
+    gap: 18px;
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 44%),
+      linear-gradient(180deg, rgba(13, 28, 51, 0.94), rgba(7, 17, 31, 0.88));
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: auto auto -70px -60px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(243, 197, 90, 0.12), transparent 68%);
+    pointer-events: none;
+  }
+
+  .hero-copy,
+  .hero-panel {
+    position: relative;
+    z-index: 1;
+  }
+
+  .eyebrow,
+  .hero-badge,
+  .panel-kicker,
+  .answer-label,
+  .card-kicker,
+  .footer-mark {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    padding: 9px 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    color: var(--gold-soft);
+    background: rgba(243, 197, 90, 0.08);
+    font-size: 0.72rem;
+  }
+
+  .hero-title {
+    margin-top: 18px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.7rem, 10vw, 5rem);
+    line-height: 0.96;
+    color: #fff4d4;
+    text-wrap: balance;
+  }
+
+  .hero-subtitle {
+    max-width: 34rem;
+    margin-top: 16px;
+    font-size: clamp(1.05rem, 4.3vw, 1.35rem);
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .hero-tag {
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(239, 243, 251, 0.78);
+    font-size: 0.95rem;
+  }
+
+  .hero-panel {
+    padding: 20px;
+    border: 1px solid rgba(243, 197, 90, 0.14);
+    border-radius: var(--radius-lg);
+    background:
+      linear-gradient(180deg, rgba(243, 197, 90, 0.08), transparent 42%),
+      rgba(4, 11, 22, 0.62);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(12px);
+  }
+
+  .panel-kicker {
+    color: var(--gold-soft);
+    font-size: 0.72rem;
+  }
+
+  .panel-score {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .panel-score strong {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.8rem, 13vw, 4.7rem);
+    line-height: 0.9;
+    color: #fff4d4;
+  }
+
+  .panel-score span {
+    padding-bottom: 7px;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .panel-text {
+    margin-top: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+    font-size: 1.02rem;
+  }
+
+  .panel-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .panel-chip {
+    min-width: 102px;
+    padding: 12px 13px;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .panel-chip strong {
+    display: block;
+    font-family: 'Cinzel', serif;
+    color: #fff4d4;
+    font-size: 1rem;
+  }
+
+  .panel-chip span {
+    display: block;
+    margin-top: 5px;
+    color: rgba(239, 243, 251, 0.65);
+    font-size: 0.88rem;
+  }
+
+  .control-shell {
+    position: sticky;
+    top: 12px;
+    display: grid;
+    gap: 16px;
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: rgba(7, 17, 31, 0.82);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(14px);
+    z-index: 4;
+  }
+
+  .eyebrow {
+    color: var(--gold-soft);
+    font-size: 0.7rem;
+  }
+
+  .control-title {
+    margin-top: 8px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.2rem, 5.2vw, 1.65rem);
+    line-height: 1.18;
+    color: #fff4d4;
+  }
+
+  .control-text {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .control-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .action-button {
+    appearance: none;
+    border: 0;
+    border-radius: 16px;
+    min-height: 52px;
+    padding: 14px 16px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.84rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease, opacity 180ms ease;
+  }
+
+  .action-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .action-button:disabled {
+    cursor: default;
+    opacity: 0.45;
+    transform: none;
+  }
+
+  .action-button.primary {
+    background: linear-gradient(135deg, #f3c55a 0%, #d4a225 100%);
+    color: #241603;
+    box-shadow: 0 16px 30px rgba(212, 162, 37, 0.22);
+  }
+
+  .action-button.secondary {
+    background: rgba(255, 255, 255, 0.02);
+    color: #fff4d4;
+    border: 1px solid rgba(243, 197, 90, 0.26);
+  }
+
+  .riddle-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  .riddle-card {
+    position: relative;
+    border: 1px solid rgba(243, 197, 90, 0.12);
+    border-radius: var(--radius-lg);
+    background:
+      linear-gradient(160deg, rgba(255, 255, 255, 0.03), transparent 40%),
+      var(--card);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  }
+
+  .riddle-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, #f3c55a 0%, rgba(243, 197, 90, 0.18) 100%);
+    opacity: 0.8;
+  }
+
+  .riddle-card[data-open="true"] {
+    border-color: rgba(243, 197, 90, 0.38);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  }
+
+  .card-toggle {
+    width: 100%;
+    appearance: none;
+    border: 0;
+    background: none;
+    color: inherit;
+    text-align: left;
+    padding: 20px 20px 18px;
+    cursor: pointer;
+  }
+
+  .card-toggle:focus-visible,
+  .action-button:focus-visible {
+    outline: 2px solid #f3c55a;
+    outline-offset: 3px;
+  }
+
+  .card-meta,
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .card-index {
+    font-family: 'Cinzel', serif;
+    font-size: 1.45rem;
+    color: #fff4d4;
+  }
+
+  .card-status {
+    padding: 7px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(243, 197, 90, 0.16);
+    color: rgba(239, 243, 251, 0.72);
+    font-size: 0.82rem;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .card-kicker {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--gold-soft);
+    font-size: 0.68rem;
+  }
+
+  .card-question {
+    margin-top: 12px;
+    font-size: clamp(1.15rem, 5vw, 1.42rem);
+    line-height: 1.42;
+    color: rgba(255, 255, 255, 0.94);
+    text-wrap: balance;
+  }
+
+  .card-footer {
+    margin-top: 16px;
+    color: rgba(239, 243, 251, 0.62);
+    font-size: 0.95rem;
+  }
+
+  .card-chevron {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: var(--gold-soft);
+    transition: transform 220ms ease;
+  }
+
+  .riddle-card[data-open="true"] .card-chevron {
+    transform: rotate(90deg);
+  }
+
+  .card-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 240ms ease;
+  }
+
+  .riddle-card[data-open="true"] .card-answer {
+    grid-template-rows: 1fr;
+  }
+
+  .card-answer-inner {
+    overflow: hidden;
+    padding: 0 20px 20px;
+  }
+
+  .answer-panel {
+    border-top: 1px solid rgba(243, 197, 90, 0.14);
+    padding-top: 16px;
+  }
+
+  .answer-label {
+    color: var(--gold-soft);
+    font-size: 0.68rem;
+  }
+
+  .answer-main {
+    margin-top: 10px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.35rem, 5.8vw, 1.7rem);
+    color: #fff4d4;
+  }
+
+  .answer-detail {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .action-bar {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    display: grid;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid rgba(243, 197, 90, 0.16);
+    border-radius: 22px;
+    background: rgba(7, 17, 31, 0.92);
+    backdrop-filter: blur(18px);
+    box-shadow: var(--shadow);
+    z-index: 10;
+  }
+
+  .action-bar-copy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .action-bar-label {
+    color: rgba(239, 243, 251, 0.62);
+    font-size: 0.9rem;
+  }
+
+  .action-bar-copy strong {
+    font-family: 'Cinzel', serif;
+    color: #fff4d4;
+    font-size: 1rem;
+  }
+
+  .action-bar-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .site-footer {
+    margin-top: 26px;
+    padding: 26px 18px 0;
+    text-align: center;
+    color: rgba(239, 243, 251, 0.48);
+  }
+
+  .footer-mark {
+    color: var(--gold-soft);
+    font-size: 0.72rem;
+  }
+
+  .footer-text {
+    margin-top: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 760px) {
+    .page-shell {
+      width: min(1180px, calc(100% - 32px));
+      padding-top: 28px;
+    }
+
+    .hero {
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      align-items: stretch;
+      padding: 32px;
+    }
+
+    .control-shell {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      padding: 20px 22px;
+    }
+
+    .control-buttons {
+      grid-template-columns: repeat(2, minmax(180px, 1fr));
+    }
+
+    .riddle-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .action-bar {
+      right: auto;
+      left: 50%;
+      width: min(680px, calc(100% - 32px));
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (min-width: 1080px) {
+    .riddle-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .action-bar {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="hero-badge">Ministério de Homens</p>
+        <h1 class="hero-title">Desafio do Guerreiro</h1>
+        <p class="hero-subtitle">Um gabarito oficial com cara de evento, leitura limpa e interação pensada para celular. Toque, revele e acompanhe o progresso sem se perder no meio dos enigmas.</p>
+        <div class="hero-tags">
+          <span class="hero-tag">Aniversário Pr. Filipe</span>
+          <span class="hero-tag">Cada Homem Um Guerreiro</span>
+          <span class="hero-tag">Feito para toque</span>
+        </div>
+      </div>
+
+      <aside class="hero-panel" aria-label="Painel de progresso">
+        <p class="panel-kicker">Painel oficial</p>
+        <div class="panel-score">
+          <strong id="revealedCount">0</strong>
+          <span>de 10 respostas reveladas</span>
+        </div>
+        <p class="panel-text">Você pode abrir uma por vez para manter o suspense ou usar as ações rápidas quando quiser conferir o gabarito inteiro de uma vez.</p>
+        <div class="panel-chips">
+          <div class="panel-chip">
+            <strong>10</strong>
+            <span>enigmas</span>
+          </div>
+          <div class="panel-chip">
+            <strong>1 toque</strong>
+            <span>para abrir</span>
+          </div>
+          <div class="panel-chip">
+            <strong>100%</strong>
+            <span>mobile-first</span>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <section class="control-shell">
+      <div class="control-copy">
+        <p class="eyebrow">Modo celular</p>
+        <h2 class="control-title">Abra no seu ritmo ou revele tudo sem rolar a página inteira atrás do botão.</h2>
+        <p class="control-text">Os cards foram redesenhados para leitura rápida, alvo de toque confortável e navegação mais clara em telas pequenas.</p>
+      </div>
+
+      <div class="control-buttons">
+        <button class="action-button primary" type="button" data-action="reveal-all">Revelar todas</button>
+        <button class="action-button secondary" type="button" data-action="hide-all">Esconder todas</button>
+      </div>
+    </section>
+
+    <main class="riddle-grid" aria-label="Lista de enigmas">
+      <article class="riddle-card" data-open="false">
+        <button class="card-toggle" type="button" aria-expanded="false" aria-controls="answer-01">
+          <div class="card-meta">
+            <span class="card-index">01</span>
+            <span class="card-status">Fechado</span>
+          </div>
+          <span class="card-kicker">Enigma</span>
+          <h3 class="card-question">Sou falado por todos, mas nunca visto. Guardado por muitos, mas sempre perdido quando revelado. O que sou eu?</h3>
+          <div class="card-footer">
+            <span>Toque para revelar</span>
+            <span class="card-chevron">></span>
+          </div>
+        </button>
+        <div class="card-answer" id="answer-01">
+          <div class="card-answer-inner">
+            <div class="answer-panel">
+              <p class="answer-label">Resposta oficial</p>
+              <p class="answer-main">Um segredo</p>
+              <p class="answer-detail">Quando ele é revelado, perde exatamente o que o tornava valioso.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="riddle-card" data-open="false">
+        <button class="card-toggle" type="button" aria-expanded="false" aria-controls="answer-02">
+          <div class="card-meta">
+            <span class="card-index">02</span>
+            <span class="card-status">Fechado</span>
+          </div>
+          <span class="card-kicker">Enigma</span>
+          <h3 class="card-question">Um homem constrói uma casa com quatro lados, todos voltados para o sul. Um urso passa pela janela. De que cor é o urso?</h3>
+          <div class="card-footer">
+            <span>Toque para revelar</span>
+            <span class="card-chevron">></span>
+          </div>
+        </button>
+        <div class="card-answer" id="answer-02">
+          <div class="card-answer-inner">
+            <div class="answer-panel">
+              <p class="answer-label">Resposta oficial</p>
+              <p class="answer-main">Branco</p>
+              <p class="answer-detail">Essa casa só pode estar no Polo Norte, o único lugar onde os quatro lados podem apontar para o sul.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="riddle-card" data-open="false">
+        <button class="card-toggle" type="button" aria-expanded="false" aria-controls="answer-03">
+          <div class="card-meta">
+            <span class="card-index">03</span>
+            <span class="card-status">Fechado</span>
+          </div>
+          <span class="card-kicker">Enigma</span>
+          <h3 class="card-question">Tenho cidades sem casas, florestas sem árvores e oceanos sem água. O que sou eu?</h3>
+          <div class="card-footer">
+            <span>Toque para revelar</span>
+            <span class="card-chevron">></span>
+          </div>
+        </button>
+        <div class="card-answer" id="answer-03">
+          <div class="card-answer-inner">
+            <div class="answer-panel">
+              <p class="answer-label">Resposta oficial</p>
+              <p class="answer-main">Um mapa</p>
+              <p class="answer-detail">Ele representa o mundo inteiro sem conter fisicamente nenhum desses elementos.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="riddle-card" data-open="false">
+        <button class="card-toggle" type="button" aria-expanded="false" aria-controls="answer-04">
+          <div class="card-meta">
+            <span class="card-index">04</span>
+            <span class="card-status">Fechado</span>
+          </div>
+          <span class="card-kicker">Enigma</span>
+          <h3 class="card-question">Um homem entra na chuva sem chapéu ou guarda-chuva e não molha um fio de cabelo. Como isso é possível?</h3>
+          <div class="card-footer">
+            <span>Toque para revelar</span>
+            <span class="card-chevron">></span>
+          </div>
+        </button>
+        <div class="card-answer" id="answer-04">
+          <div class="card-answer-inner">
+            <div class="answer-panel">
+              <p class="answer-label">Resposta oficial</p>
+              <p class="answer-main">Ele é careca</p>
+              <p class="answer-detail">Se não há cabelo, não existe fio nenhum para ser molhado.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="riddle-card" data-open="false">
+        <button class="card-toggle" type="button" aria-expanded="false" aria-controls="answer-05">
+          <div class="card-meta">
+            <span class="card-index">05</span>
+            <span class="card-status">Fechado</span>
+          </div>
+          <span class="card-kicker">Enigma</span>
+          <h3 class="card-question">Meu primeiro filho é luz. Meu segundo filho é escuridão. Juntos somos metade do mundo. O que somos nós?</h3>
+          <div class="card-footer">
+            <span>Toque para revelar</span>
+            <span class="card-chevron">></span>
+          </div>
+        </button>
+        <div class="card-answer" id="answer-05">
+          <div class="card-answer-inner">
+            <div class="answer-panel">
+              <p class="answer-label">Resposta oficial</p>
+              <p class="answer-main">O dia e a noite</p>
+              <p class="answer-detail">Os dois se alternam e juntos completam o ciclo das 24 horas.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="riddle-card" data-open="false">
+        <button class="card-toggle" type="button" aria-expanded="false" aria-controls="answer-06">
+          <div class="card-meta">
+            <span class="card-index">06</span>
+            <span class="card-status">Fechado</span>
+          </div>
+          <span class="card-kicker">Enigma</span>
+          <h3 class="card-question">Um homem está morto em um campo aberto. Ao seu lado há uma mochila fechada. Ninguém está por perto. Como ele morreu?</h3>
+          <div class="card-footer">
+            <span>Toque para revelar</span>
+            <span class="card-chevron">></span>
+          </div>
+        </button>
+        <div class="card-answer" id="answer-06">
+          <div class="card-answer-inner">
+            <div class="answer-panel">
+              <p class="answer-label">Resposta oficial</p>
+              <p class="answer-main">O paraquedas não abriu</p>
+              <p class="answer-detail">A mochila fechada é justamente o paraquedas que falhou no salto.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="riddle-card" data-open="false">
+        <button class="card-toggle" type="button" aria-expanded="false" aria-controls="answer-07">
+          <div class="card-meta">
+            <span class="card-index">07</span>
+            <span class="card-status">Fechado</span>
+          </div>
+          <span class="card-kicker">Enigma</span>
+          <h3 class="card-question">Há um avião caindo na fronteira entre Brasil e Argentina. Onde os sobreviventes devem ser enterrados?</h3>
+          <div class="card-footer">
+            <span>Toque para revelar</span>
+            <span class="card-chevron">></span>
+          </div>
+        </button>
+        <div class="card-answer" id="answer-07">
+          <div class="card-answer-inner">
+            <div class="answer-panel">
+              <p class="answer-label">Resposta oficial</p>
+              <p class="answer-main">Sobreviventes não se enterram</p>
+              <p class="answer-detail">A pegadinha está na palavra certa: quem sobrevive não é enterrado.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="riddle-card" data-open="false">
+        <button class="card-toggle" type="button" aria-expanded="false" aria-controls="answer-08">
+          <div class="card-meta">
+            <span class="card-index">08</span>
+            <span class="card-status">Fechado</span>
+          </div>
+          <span class="card-kicker">Enigma</span>
+          <h3 class="card-question">Quanto mais você olha para mim, menos me vê. O que sou eu?</h3>
+          <div class="card-footer">
+            <span>Toque para revelar</span>
+            <span class="card-chevron">></span>
+          </div>
+        </button>
+        <div class="card-answer" id="answer-08">
+          <div class="card-answer-inner">
+            <div class="answer-panel">
+              <p class="answer-label">Resposta oficial</p>
+              <p class="answer-main">A escuridão</p>
+              <p class="answer-detail">Quanto mais você tenta enxergar nela, menos clareza consegue ter.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="riddle-card" data-open="false">
+        <button class="card-toggle" type="button" aria-expanded="false" aria-controls="answer-09">
+          <div class="card-meta">
+            <span class="card-index">09</span>
+            <span class="card-status">Fechado</span>
+          </div>
+          <span class="card-kicker">Enigma</span>
+          <h3 class="card-question">Dois pais e dois filhos foram pescar. Cada um pegou um peixe. Mesmo assim voltaram com apenas três peixes. Por quê?</h3>
+          <div class="card-footer">
+            <span>Toque para revelar</span>
+            <span class="card-chevron">></span>
+          </div>
+        </button>
+        <div class="card-answer" id="answer-09">
+          <div class="card-answer-inner">
+            <div class="answer-panel">
+              <p class="answer-label">Resposta oficial</p>
+              <p class="answer-main">São três pessoas</p>
+              <p class="answer-detail">É um avô, um pai e um filho: dois pais e dois filhos em apenas três pessoas.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="riddle-card" data-open="false">
+        <button class="card-toggle" type="button" aria-expanded="false" aria-controls="answer-10">
+          <div class="card-meta">
+            <span class="card-index">10</span>
+            <span class="card-status">Fechado</span>
+          </div>
+          <span class="card-kicker">Enigma</span>
+          <h3 class="card-question">Se você tem um fósforo e entra em uma sala escura com uma vela, uma lareira e uma lamparina a óleo, o que acende primeiro?</h3>
+          <div class="card-footer">
+            <span>Toque para revelar</span>
+            <span class="card-chevron">></span>
+          </div>
+        </button>
+        <div class="card-answer" id="answer-10">
+          <div class="card-answer-inner">
+            <div class="answer-panel">
+              <p class="answer-label">Resposta oficial</p>
+              <p class="answer-main">O fósforo</p>
+              <p class="answer-detail">Nada mais pode ser aceso antes dele, então ele é sempre o primeiro.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <div class="action-bar" aria-label="Ações rápidas">
+      <div class="action-bar-copy">
+        <span class="action-bar-label">Progresso</span>
+        <strong><span id="revealedCountDock">0</span>/10 reveladas</strong>
+      </div>
+      <div class="action-bar-buttons">
+        <button class="action-button primary" type="button" data-action="reveal-all">Revelar</button>
+        <button class="action-button secondary" type="button" data-action="hide-all">Fechar</button>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <p class="footer-mark">IFC Guerreiros</p>
+      <p class="footer-text">Aniversário Pr. Filipe · Cada Homem Um Guerreiro</p>
+    </footer>
+  </div>
+
+  <script>
+    const cards = Array.from(document.querySelectorAll('.riddle-card'));
+    const revealButtons = Array.from(document.querySelectorAll('[data-action="reveal-all"]'));
+    const hideButtons = Array.from(document.querySelectorAll('[data-action="hide-all"]'));
+    const revealedCount = document.getElementById('revealedCount');
+    const revealedCountDock = document.getElementById('revealedCountDock');
+
+    function setCardState(card, isOpen) {
+      const toggle = card.querySelector('.card-toggle');
+      const status = card.querySelector('.card-status');
+      const footerText = card.querySelector('.card-footer span');
+
+      card.dataset.open = String(isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      status.textContent = isOpen ? 'Aberto' : 'Fechado';
+      footerText.textContent = isOpen ? 'Toque para ocultar' : 'Toque para revelar';
+    }
+
+    function syncSummary() {
+      const openedCards = cards.filter((card) => card.dataset.open === 'true').length;
+
+      revealedCount.textContent = String(openedCards);
+      revealedCountDock.textContent = String(openedCards);
+
+      const allOpen = openedCards === cards.length;
+      const noneOpen = openedCards === 0;
+
+      revealButtons.forEach((button) => {
+        button.disabled = allOpen;
+      });
+
+      hideButtons.forEach((button) => {
+        button.disabled = noneOpen;
+      });
+    }
+
+    cards.forEach((card) => {
+      const toggle = card.querySelector('.card-toggle');
+
+      toggle.addEventListener('click', () => {
+        const isOpen = card.dataset.open === 'true';
+        setCardState(card, !isOpen);
+        syncSummary();
+      });
+    });
+
+    revealButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        cards.forEach((card) => setCardState(card, true));
+        syncSummary();
+      });
+    });
+
+    hideButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        cards.forEach((card) => setCardState(card, false));
+        syncSummary();
+      });
+    });
+
+    syncSummary();
+  </script>
+</body>
+</html>
